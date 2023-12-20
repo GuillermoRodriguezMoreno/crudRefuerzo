@@ -35,7 +35,6 @@ public class ClienteController {
 		model.addAttribute("listaClientes", listaClientes);
 				
 		return "clientes";
-		
 	}
 	
 	
