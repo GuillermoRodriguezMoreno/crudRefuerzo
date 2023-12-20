@@ -30,7 +30,7 @@ public class ComercialDAOImpl implements ComercialDAO {
 	public void create(Comercial comercial) {
 		// TODO Auto-generated method stub
 		String sqlInsert = """
-							INSERT INTO comercial (nombre, apellido1, apellido2, comision) 
+							INSERT INTO comercial (nombre, apellido1, apellido2, comisión) 
 							VALUES  (     ?,         ?,         ?,       ?)
 						   """;
 
