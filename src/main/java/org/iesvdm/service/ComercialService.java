@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ComercialService {
@@ -23,6 +24,31 @@ public class ComercialService {
     public List<Comercial> listAll() {
 
         return comercialDAO.getAll();
+    }
 
+    public Comercial one(Integer id){
+
+        Optional<Comercial> optComercial = comercialDAO.find(id);
+
+        if(optComercial.isPresent())
+            return optComercial.get();
+
+        else
+            return null;
+    }
+
+    public void newComercial(Comercial comercial){
+
+        comercialDAO.create(comercial);
+    }
+
+    public void replaceComercial(Comercial comercial){
+
+        comercialDAO.update(comercial);
+    }
+
+    public void deleteComercial(Integer id){
+
+        comercialDAO.delete(id);
     }
 }
