@@ -35,23 +35,6 @@ public class ComercialDAOImpl implements ComercialDAO {
 							VALUES  (     ?,         ?,         ?,       ?)
 						   """;
 
-		/*
-		SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-		simpleJdbcInsert
-				.withTableName("cliente")
-				.usingGeneratedKeyColumns("id");
-		SqlParameterSource params = new MapSqlParameterSource()
-				.addValue("nombre", cliente.getNombre())
-				.addValue("apellido1", cliente.getApellido1())
-				.addValue("apellido2", cliente.getApellido2())
-				.addValue("ciudad", cliente.getCiudad())
-				.addValue("categoría", cliente.getCategoria());
-		Number number = simpleJdbcInsert.executeAndReturnKey(params);
-
-
-		cliente.setId(number.intValue());
-		*/
-
 		//Con recuperación de id generado por lambda
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();

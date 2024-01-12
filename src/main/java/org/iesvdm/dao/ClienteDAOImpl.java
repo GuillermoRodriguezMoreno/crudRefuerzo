@@ -35,9 +35,26 @@ public class ClienteDAOImpl implements ClienteDAO {
 							INSERT INTO cliente (nombre, apellido1, apellido2, ciudad, categoría) 
 							VALUES  (     ?,         ?,         ?,       ?,         ?)
 						   """;
-		
+
+		/* Recuperacion de ID por simpleJdbc
+		SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+		simpleJdbcInsert
+				.withTableName("cliente")
+				.usingGeneratedKeyColumns("id");
+		SqlParameterSource params = new MapSqlParameterSource()
+				.addValue("nombre", cliente.getNombre())
+				.addValue("apellido1", cliente.getApellido1())
+				.addValue("apellido2", cliente.getApellido2())
+				.addValue("ciudad", cliente.getCiudad())
+				.addValue("categoría", cliente.getCategoria());
+		Number number = simpleJdbcInsert.executeAndReturnKey(params);
+
+
+		cliente.setId(number.intValue());
+		*/
+
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		//Con recuperación de id generado
+		//Con recuperación de id generado por lambda
 		int rows = jdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(sqlInsert, new String[] { "id" });
 			int idx = 1;
