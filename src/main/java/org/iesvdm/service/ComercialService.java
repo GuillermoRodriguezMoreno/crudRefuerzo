@@ -15,6 +15,7 @@ public class ComercialService {
     @Autowired
     private ComercialDAO comercialDAO;
 
+    // inyeccion por constructor
     //public ComercialService(ComercialDAO comercialDAO) {
       //  this.comercialDAO = comercialDAO;
     //}
