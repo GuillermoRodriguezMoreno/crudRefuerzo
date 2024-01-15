@@ -48,7 +48,15 @@ public class ComercialController {
         return "crear-comercial";
     }
 
-    @GetMapping("comercial/editar/{id}")
+    @PostMapping("/comerciales/crear")
+    public RedirectView submitCrear(@ModelAttribute("comercial") Comercial comercial) {
+
+        comercialService.newComercial(comercial);
+
+        return new RedirectView("/comerciales") ;
+
+    }
+    @GetMapping("comerciales/editar/{id}")
     public String editar(Model model, @PathVariable Integer id){
 
         Comercial comercial = comercialService.one(id);
@@ -57,7 +65,7 @@ public class ComercialController {
         return "editar-comercial";
     }
 
-    @PostMapping("/comercial/editar/{id}")
+    @PostMapping("/comerciales/editar/{id}")
     public RedirectView submitEditar(@ModelAttribute("comercial") Comercial comercial){
 
         comercialService.replaceComercial(comercial);
