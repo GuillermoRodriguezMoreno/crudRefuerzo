@@ -65,7 +65,7 @@ public class ClienteController {
 		return new RedirectView("/clientes") ;
 
 	}
-	@GetMapping("clientes/editar/{id}")
+	@GetMapping("/clientes/editar/{id}")
 	public String editar(Model model, @PathVariable Integer id){
 
 		Cliente cliente = clienteService.one(id);
