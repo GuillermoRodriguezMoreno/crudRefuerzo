@@ -1,6 +1,8 @@
 package org.iesvdm.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -163,5 +165,17 @@ public class ClienteDAOImpl implements ClienteDAO {
 		log.info("Delete de Cliente con {} registros eliminados.", rows);		
 		
 	}
-	
+
+	@Override
+	public Cliente newCliente(ResultSet rs) throws SQLException {
+
+		return new Cliente(rs.getInt("id")
+				, rs.getString("nombre")
+				, rs.getString("apellido1")
+				, rs.getString("apellido2")
+				, rs.getString("ciudad")
+				, rs.getInt("categoría")
+		);
+	}
+
 }
