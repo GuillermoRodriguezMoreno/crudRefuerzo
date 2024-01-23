@@ -24,7 +24,8 @@ public class PedidoDAOImpl implements PedidoDAO{
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private ClienteDAOImpl clienteDAO;
-
+    @Autowired
+    private ComercialDAO comercialDAO;
     @Override
     public Optional<Cliente> findClienteBy(int pedidoId) {
 
@@ -40,6 +41,23 @@ public class PedidoDAOImpl implements PedidoDAO{
     @Override
     public Optional<Comercial> findComercialBy(int pedidoId) {
         return null;
+    }
+
+    @Override
+    public List<Pedido> pedidosByComercial(int comercialID) {
+
+        List<Pedido> listPedido = this.jdbcTemplate.query("""
+                SELECT * FROM pedido WHERE id_comercial = ?;
+                """, (rs, rowNum) -> new Pedido(
+                        rs.getInt("id"),
+                        rs.getDouble("total"),
+                        rs.getDate("fecha"),
+                        clienteDAO.find(rs.getInt("id_cliente")).get(),
+                        comercialDAO.find(rs.getInt("id_comercial")).get()
+                ), comercialID
+        );
+
+        return listPedido;
     }
 
     @Override

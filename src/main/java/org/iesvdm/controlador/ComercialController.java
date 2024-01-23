@@ -2,6 +2,7 @@ package org.iesvdm.controlador;
 
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
+import org.iesvdm.modelo.Pedido;
 import org.iesvdm.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,9 @@ public class ComercialController {
 
         Comercial comercial = comercialService.one(id);
         model.addAttribute("comercial", comercial);
+
+        List<Pedido> listPedidos = comercialService.findPedidosByComercial(id);
+        model.addAttribute("pedidos_comercial", listPedidos);
 
         return "detalle-comercial";
     }

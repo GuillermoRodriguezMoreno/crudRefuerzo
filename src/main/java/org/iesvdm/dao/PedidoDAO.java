@@ -18,6 +18,8 @@ public interface PedidoDAO {
 
     public Optional<Comercial> findComercialBy(int pedidoId);
 
+    public List<Pedido> pedidosByComercial(int comercialID);
+
     public void update(Pedido pedido);
 
     public void delete(int id);
