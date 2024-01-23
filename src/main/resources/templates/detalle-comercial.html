@@ -91,7 +91,8 @@
                 </div>
                 <div class="col-md-1 align-self-center" th:text="${pedido.total}">total
                 </div>
-                <div class="col-md-3 align-self-center" th:text="${pedido.cliente.nombre}+' '+${pedido.cliente.apellido1}+' '+${pedido.cliente.apellido2}">cliente
+                <div class="col-md-3 align-self-center">
+                    <a th:href="@{/clientes/__${pedido.cliente.id}__}" th:text="${pedido.cliente.nombre}+' '+${pedido.cliente.apellido1}+' '+${pedido.cliente.apellido2}">cliente</a>
                 </div>
                 <div class="col-md-1 align-self-center">
                     <form th:action="@{/clientes/__${pedido.cliente.id}__}" style="display: inline;">
