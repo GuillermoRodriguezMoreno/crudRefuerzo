@@ -9,14 +9,14 @@
     <div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
         <div class="clearfix">
             <div style="float: left; width: 50%">
-                <h1>Detalle Comercial</h1>
+                <h1 th:text="msg.comercial.detalle">Detalle Comercial</h1>
             </div>
             <div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 
                 <div style="position: absolute; left: 39%; top : 39%;">
 
                     <form action="/comerciales" >
-                        <input type="submit" value="Volver" class="btn btn-primary"/>
+                        <input th:value="btn.volver" type="submit" value="Volver" class="btn btn-primary"/>
                     </form>
                 </div>
 
@@ -29,7 +29,7 @@
 
         <div style="margin-top: 6px;" class="clearfix">
             <div style="float: left;width: 50%">
-                <label>Id</label>
+                <label th:text="msg.comercial.id">Id</label>
             </div>
             <div style="float: none;width: auto;overflow: hidden;">
                 <input th:value="${comercial.id}" value="id" readonly="readonly"/>
@@ -37,7 +37,7 @@
         </div>
         <div style="margin-top: 6px;" class="clearfix">
             <div style="float: left;width: 50%">
-                <label>Nombre</label>
+                <label th:text="msg.comercial.nombre">Nombre</label>
             </div>
             <div style="float: none;width: auto;overflow: hidden;">
                 <input th:value="${comercial.nombre}" value="nombre" readonly="readonly"/>
@@ -45,7 +45,7 @@
         </div>
         <div style="margin-top: 6px;" class="clearfix">
             <div style="float: left;width: 50%">
-                <label>Apellido 1</label>
+                <label th:text="msg.comercial.apellido1">Apellido 1</label>
             </div>
             <div style="float: none;width: auto;overflow: hidden;">
                 <input th:value="${comercial.apellido1}" value="nombre" readonly="readonly"/>
@@ -53,7 +53,7 @@
         </div>
         <div style="margin-top: 6px;" class="clearfix">
             <div style="float: left;width: 50%">
-                <label>Apellido 2</label>
+                <label th:text="msg.comercial.apellido2">Apellido 2</label>
             </div>
             <div style="float: none;width: auto;overflow: hidden;">
                 <input th:value="${comercial.apellido2}" value="nombre" readonly="readonly"/>
@@ -61,7 +61,7 @@
         </div>
         <div style="margin-top: 6px;" class="clearfix">
             <div style="float: left;width: 50%">
-                <label>Comisión</label>
+                <label th:text="msg.comercial.comision">Comisión</label>
             </div>
             <div style="float: none;width: auto;overflow: hidden;">
                 <input th:value="${comercial.comision}" value="nombre" readonly="readonly"/>
@@ -69,16 +69,16 @@
         </div>
         <div class="clearfix" style="margin: 40px 0;">
             <div style="float: left; width: 50%;">
-                <h1>Pedidos Realizados:</h1>
+                <h1 th:text="msg.comercial.pedidos.realizados">Pedidos Realizados:</h1>
             </div>
         </div>
         <div class="container bg-white">
             <div class="row">
-                <div class="col-md-1 h3" th:text="#{msg.id}">ID</div>
-                <div class="col-md-3 h3" th:text="#{msg.comercial}">Comercial</div>
-                <div class="col-md-2 h3" th:text="#{msg.fecha}">Fecha</div>
-                <div class="col-md-1 h3" th:text="#{msg.total}">Total</div>
-                <div class="col-md-3 h3" th:text="#{msg.cliente}">Cliente</div>
+                <div class="col-md-1 h3" th:text="#{msg.pedido.id}">ID</div>
+                <div class="col-md-3 h3" th:text="#{msg.pedido.comercial}">Comercial</div>
+                <div class="col-md-2 h3" th:text="#{msg.pedido.fecha}">Fecha</div>
+                <div class="col-md-1 h3" th:text="#{msg.pedido.total}">Total</div>
+                <div class="col-md-3 h3" th:text="#{msg.pedido.cliente}">Cliente</div>
             </div>
         </div>
         <div class="container bg-light">
@@ -96,7 +96,7 @@
                 </div>
                 <div class="col-md-1 align-self-center">
                     <form th:action="@{/clientes/__${pedido.cliente.id}__}" style="display: inline;">
-                        <input type="submit" value="Ver Cliente" class="btn btn-info" />
+                        <input th:value="btn.ver.cliente" type="submit" value="Ver Cliente" class="btn btn-info" />
                     </form>
                 </div>
             </div>

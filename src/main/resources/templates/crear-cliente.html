@@ -10,12 +10,12 @@
     <form th:action="@{/clientes/crear}" th:object="${cliente}" method="post">
       <div class="clearfix">
         <div style="float: left; width: 50%">
-          <h1>Crear Cliente</h1>
+          <h1 th:text="msg.cliente.crear">Crear Cliente</h1>
         </div>
         <div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 
           <div style="position: absolute; left: 39%; top : 39%;">
-            <input type="submit" value="Crear" class="btn btn-primary"/>
+            <input th:value="btn.crear" type="submit" value="Crear" class="btn btn-primary"/>
           </div>
 
         </div>
@@ -26,31 +26,31 @@
       </div>
 
       <div style="margin-top: 6px;" class="clearfix">
-        <div style="float: left;width: 50%">
+        <div th:text="msg.cliente.nombre" style="float: left;width: 50%">
           Nombre
         </div>
         <div style="float: none;width: auto;overflow: hidden;">
           <input th:field="*{nombre}" />
         </div>
-        <div style="float: left;width: 50%">
+        <div th:text="msg.cliente.apellido1" style="float: left;width: 50%">
           Apellido 1
         </div>
         <div style="float: none;width: auto;overflow: hidden;">
           <input th:field="*{apellido1}" />
         </div>
-        <div style="float: left;width: 50%">
+        <div th:text="msg.cliente.apellido2" style="float: left;width: 50%">
           Apellido 2
         </div>
         <div style="float: none;width: auto;overflow: hidden;">
           <input th:field="*{apellido2}" />
         </div>
-        <div style="float: left;width: 50%">
+        <div th:text="msg.cliente.ciudad" style="float: left;width: 50%">
           Ciudad
         </div>
         <div style="float: none;width: auto;overflow: hidden;">
           <input th:field="*{ciudad}" />
         </div>
-        <div style="float: left;width: 50%">
+        <div th:text="msg.cliente.categoria" style="float: left;width: 50%">
           Categoria
         </div>
         <div style="float: none;width: auto;overflow: hidden;">
