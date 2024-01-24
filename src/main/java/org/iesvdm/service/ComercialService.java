@@ -14,8 +14,13 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
+import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparingDouble;
+import static java.util.stream.Collectors.*;
 
 @Service
 public class ComercialService {
@@ -75,9 +80,14 @@ public class ComercialService {
                 .mapToDouble(Pedido::getTotal)
                 .sum();
 
-        double media = pedidoList.stream()
+        OptionalDouble mediaOpt = pedidoList.stream()
                 .mapToDouble(Pedido::getTotal)
-                .average().getAsDouble();
+                .average();
+
+        // Checkeo optional
+        double media = 0;
+
+        if (mediaOpt.isPresent()) media = mediaOpt.getAsDouble();
 
         // Redondeo
         BigDecimal bDTotal = new BigDecimal(Double.toString(total)).setScale(2, RoundingMode.HALF_EVEN);
@@ -99,5 +109,18 @@ public class ComercialService {
                 media);
 
         return comercialDTO;
+    }
+
+    public Map<Cliente, Double> listaClientesOrdenados(int idComercial){
+
+        // Obtengo lista pedidos de un comercial por ID
+        List<Pedido> pedidoList = pedidoDAO.pedidosByComercial(idComercial);
+
+        // Mapeo cliente-importe
+        Map<Cliente, Double> clienteTotalMap = pedidoList.stream().
+                sorted(comparingDouble(Pedido::getTotal).reversed()).
+                collect(groupingBy(Pedido::getCliente, summingDouble(Pedido::getTotal)));
+
+        return  clienteTotalMap;
     }
 }

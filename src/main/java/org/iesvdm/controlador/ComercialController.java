@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 
@@ -43,6 +45,9 @@ public class ComercialController {
 
         ComercialDTO comercialDTO = comercialService.importeTotalPedidos(id);
         model.addAttribute("estadisticas_comercial", comercialDTO);
+
+        Map<Cliente, Double> listaClientes = comercialService.listaClientesOrdenados(id);
+        model.addAttribute("lista_clientes", listaClientes);
 
         return "detalle-comercial";
     }

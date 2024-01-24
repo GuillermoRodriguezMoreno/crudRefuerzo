@@ -117,6 +117,33 @@
                 </div>
             </div>
         </div>
+        <div class="clearfix" style="margin: 40px 0;">
+            <div style="float: left; width: 50%;">
+                <h1 th:text="#{msg.comercial.lista.clientes}">Clientes:</h1>
+            </div>
+        </div>
+        <div class="container bg-white">
+            <div class="row">
+                <div class="col-md-1 h3" th:text="#{msg.cliente.id}">ID</div>
+                <div class="col-md-4 h3" th:text="#{msg.cliente}">Cliente</div>
+                <div class="col-md-3 h3" th:text="#{msg.pedido.total}">Total</div>
+            </div>
+        </div>
+        <div class="container bg-light" style="margin-bottom: 100px;">
+            <div class="row mt-2 body" th:each="cliente : ${lista_clientes.keySet()}">
+                <div class="col-md-1 align-self-center" th:text="${cliente.getId()}">id
+                </div>
+                <div class="col-md-4 align-self-center" th:text="${cliente.getNombre()}+' '+${cliente.getApellido1()}+' '+${cliente.getApellido2()}">Cliente
+                </div>
+                <div class="col-md-3 align-self-center" th:text="${lista_clientes.get(cliente)}">Total
+                </div>
+                <div class="col-md-4 align-self-center d-flex justify-content-end">
+                    <form th:action="@{/clientes/__${cliente.getId()}__}" style="display: inline;">
+                        <input th:value="#{btn.ver.cliente}" type="submit" value="Ver Cliente" class="btn btn-info" />
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
