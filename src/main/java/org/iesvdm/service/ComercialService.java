@@ -119,7 +119,7 @@ public class ComercialService {
             c.nombre,
             c.apellido1,
             c.apellido2,
-            SUM(p.total) AS total_pedidos_cliente
+            ROUND(SUM(p.total), 2) AS total_pedidos_cliente
         FROM
             pedido p
                 JOIN
