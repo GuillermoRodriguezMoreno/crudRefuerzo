@@ -113,6 +113,26 @@ public class ComercialService {
 
     public Map<Cliente, Double> listaClientesOrdenados(int idComercial){
 
+        /* CON SQL
+        SELECT
+            c.id,
+            c.nombre,
+            c.apellido1,
+            c.apellido2,
+            SUM(p.total) AS total_pedidos_cliente
+        FROM
+            pedido p
+                JOIN
+            cliente c ON p.id_cliente = c.id
+        WHERE id_comercial = ?
+        GROUP BY
+            c.id
+        ORDER BY
+            total_pedidos_cliente DESC;
+         */
+
+        // CON STREAM
+
         // Obtengo lista pedidos de un comercial por ID
         List<Pedido> pedidoList = pedidoDAO.pedidosByComercial(idComercial);
 
