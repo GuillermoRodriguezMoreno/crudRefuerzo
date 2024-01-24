@@ -37,15 +37,25 @@ public class ComercialController {
     @GetMapping("/comerciales/{id}")
     public String detalle(Model model, @PathVariable Integer id){
 
+        // Comercial
         Comercial comercial = comercialService.one(id);
         model.addAttribute("comercial", comercial);
 
+        // Pedidos del comercial
         List<Pedido> listPedidos = comercialService.findPedidosByComercial(id);
         model.addAttribute("pedidos_comercial", listPedidos);
 
+        // Estadisticas comercial
         ComercialDTO comercialDTO = comercialService.importeTotalPedidos(id);
         model.addAttribute("estadisticas_comercial", comercialDTO);
 
+        // Pedido minimo
+        model.addAttribute("pedido_min", comercialService.pedidoMin(id));
+
+        // Pedido maximo
+        model.addAttribute("pedido_max", comercialService.pedidoMax(id));
+
+        // Clientes comercial
         Map<Cliente, Double> listaClientes = comercialService.listaClientesOrdenados(id);
         model.addAttribute("lista_clientes", listaClientes);
 

@@ -67,7 +67,10 @@ public class ComercialService {
 
     public List<Pedido> findPedidosByComercial(int idComercial){
 
-        return pedidoDAO.pedidosByComercial(idComercial);
+        // Obtengo lista de pedidos
+        List<Pedido> pedidoList = pedidoDAO.pedidosByComercial(idComercial);
+
+        return pedidoList;
     }
 
     public ComercialDTO importeTotalPedidos(int idComercial){
@@ -109,6 +112,32 @@ public class ComercialService {
                 media);
 
         return comercialDTO;
+    }
+
+    public double pedidoMin(int idComercial){
+
+        // Obtengo pedidos del comercial
+        List<Pedido> pedidoList = pedidoDAO.pedidosByComercial(idComercial);
+
+        // Voy a encontrar minimo
+        OptionalDouble minOpt = pedidoList.stream().mapToDouble(Pedido::getTotal).min();
+        double min = 0;
+        if (minOpt.isPresent()) min = minOpt.getAsDouble();
+
+        return min;
+    }
+
+    public double pedidoMax(int idComercial){
+
+        // Obtengo pedidos del comercial
+        List<Pedido> pedidoList = pedidoDAO.pedidosByComercial(idComercial);
+
+        // Obtengo max
+        OptionalDouble maxOpt = pedidoList.stream().mapToDouble(Pedido::getTotal).max();
+        double max = 0;
+        if (maxOpt.isPresent()) max = maxOpt.getAsDouble();
+
+        return max;
     }
 
     public Map<Cliente, Double> listaClientesOrdenados(int idComercial){

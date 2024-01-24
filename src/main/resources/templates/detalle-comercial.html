@@ -84,8 +84,12 @@
             </div>
         </div>
         <div class="clearfix" style="margin: 40px 0;">
-            <div style="float: left; width: 50%;">
+            <div class="" style="float: left; width: 50%;">
                 <h1 th:text="#{msg.comercial.pedidos.realizados}">Pedidos Realizados:</h1>
+            </div>
+            <div class="row text-center ">
+                <div class="col-md-4 bg-success-subtle">Pedido con importe maximo</div>
+                <div class="col-md-4 bg-warning-subtle">Pedido con importe minimo</div>
             </div>
         </div>
         <div class="container bg-white">
@@ -98,7 +102,7 @@
             </div>
         </div>
         <div class="container bg-light">
-            <div th:id="${pedido.id}" class="row mt-2 body" th:each="pedido : ${pedidos_comercial   }">
+            <div th:id="${pedido.id}" class="row mt-2 body" th:each="pedido : ${pedidos_comercial}" th:classappend="${pedido.getTotal() == pedido_max} ? 'bg-success-subtle' : (${pedido.getTotal() == pedido_min} ? 'bg-warning-subtle' : '')    ">
                 <div class="col-md-1 align-self-center" th:text="${pedido.id}">id
                 </div>
                 <div class="col-md-3 align-self-center" th:text="${pedido.comercial.nombre}+' '+${pedido.comercial.apellido1}+' '+${pedido.comercial.apellido2}">comercial
