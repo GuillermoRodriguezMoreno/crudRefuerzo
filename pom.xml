@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ies.vdm</groupId>
-    <artifactId>actividad3_1</artifactId>
+    <artifactId>actividad3_5</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>actividad3_1</name>
     <description>actividad3_1</description>
