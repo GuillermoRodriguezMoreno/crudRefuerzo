@@ -67,8 +67,10 @@ public class ComercialService {
 
     public List<Pedido> findPedidosByComercial(int idComercial){
 
-        // Obtengo lista de pedidos
-        List<Pedido> pedidoList = pedidoDAO.pedidosByComercial(idComercial);
+        // Obtengo lista de pedidos y ordeno para mejor presentacion
+        List<Pedido> pedidoList = pedidoDAO.pedidosByComercial(idComercial).stream()
+                .sorted(comparingDouble(Pedido::getTotal).reversed())
+                .collect(toList());
 
         return pedidoList;
     }
