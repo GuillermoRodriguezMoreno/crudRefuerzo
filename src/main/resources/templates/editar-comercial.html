@@ -10,12 +10,12 @@
         <form  th:action="@{/comerciales/editar/__${comercial.id}__}" th:object="${comercial}" method="post" >
             <div class="clearfix">
                 <div style="float: left; width: 50%">
-                    <h1 th:text="msg.comercial.editar">Editar Comercial</h1>
+                    <h1 th:text="#{msg.comercial.editar}">Editar Comercial</h1>
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 
                     <div style="position: absolute; left: 39%; top : 39%;">
-                        <input th:value="btn.guardar" type="submit" value="Guardar" class="btn btn-primary"/>
+                        <input th:value="#{btn.guardar}" type="submit" value="Guardar" class="btn btn-primary"/>
                     </div>
 
                 </div>
@@ -28,7 +28,7 @@
 
             <div style="margin-top: 6px;" class="clearfix">
                 <div style="float: left;width: 50%">
-                    <label th:text="msg.comercial.id">Id</label>
+                    <label th:text="#{msg.comercial.id}">Id</label>
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
                     <input th:field="*{id}" readonly="readonly"/>
@@ -36,7 +36,7 @@
             </div>
             <div style="margin-top: 6px;" class="clearfix">
                 <div style="float: left;width: 50%">
-                    <label th:text="msg.comercial.nombre">Nombre</label>
+                    <label th:text="#{msg.comercial.nombre}">Nombre</label>
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
                     <input th:field="*{nombre}"/>
@@ -44,7 +44,7 @@
             </div>
             <div style="margin-top: 6px;" class="clearfix">
                 <div style="float: left;width: 50%">
-                    <label th:text="msg.comercial.apellido1">Apellido 1</label>
+                    <label th:text="#{msg.comercial.apellido1}">Apellido 1</label>
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
                     <input th:field="*{apellido1}"/>
@@ -52,7 +52,7 @@
             </div>
             <div style="margin-top: 6px;" class="clearfix">
                 <div style="float: left;width: 50%">
-                    <label th:text="msg.comercial.apellido2">Apellido 2</label>
+                    <label th:text="#{msg.comercial.apellido2}">Apellido 2</label>
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
                     <input th:field="*{apellido2}"/>
@@ -60,7 +60,7 @@
             </div>
             <div style="margin-top: 6px;" class="clearfix">
                 <div style="float: left;width: 50%">
-                    <label th:text="msg.comercial.comision">Comisión</label>
+                    <label th:text="#{msg.comercial.comision}">Comisión</label>
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
                     <input th:field="*{comision}"/>

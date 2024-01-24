@@ -10,12 +10,12 @@
         <form th:action="@{/comerciales/crear}" th:object="${comercial}" method="post">
             <div class="clearfix">
                 <div style="float: left; width: 50%">
-                    <h1 th:text="msg.comercial.crear">Crear Comercial</h1>
+                    <h1 th:text="#{msg.comercial.crear}">Crear Comercial</h1>
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 
                     <div style="position: absolute; left: 39%; top : 39%;">
-                        <input th:value="btn.crear" type="submit" value="Crear" class="btn btn-primary"/>
+                        <input th:value="#{btn.crear}" type="submit" value="Crear" class="btn btn-primary"/>
                     </div>
 
                 </div>
@@ -26,25 +26,25 @@
             </div>
 
             <div style="margin-top: 6px;" class="clearfix">
-                <div th:text="msg.comercial.nombre" style="float: left;width: 50%">
+                <div th:text="#{msg.comercial.nombre}" style="float: left;width: 50%">
                     Nombre
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
                     <input th:field="*{nombre}" />
                 </div>
-                <div th:text="msg.comercial.apellido1" style="float: left;width: 50%">
+                <div th:text="#{msg.comercial.apellido1}" style="float: left;width: 50%">
                     Apellido 1
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
                     <input th:field="*{apellido1}" />
                 </div>
-                <div th:text="msg.comercial.apellido2" style="float: left;width: 50%">
+                <div th:text="#{msg.comercial.apellido2}" style="float: left;width: 50%">
                     Apellido 2
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
                     <input th:field="*{apellido2}" />
                 </div>
-                <div th:text="msg.comercial.comision" style="float: left;width: 50%">
+                <div th:text="#{msg.comercial.comision}" style="float: left;width: 50%">
                     Comision
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
