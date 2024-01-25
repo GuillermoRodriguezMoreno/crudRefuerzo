@@ -173,7 +173,10 @@ public class ComercialService {
                 collect(groupingBy(Pedido::getCliente, summingDouble(Pedido::getTotal)));
 
         // Con ayuda de Matti
-        List<Map.Entry<Cliente,Double>> mapaClienteOrdenado = clienteTotalMap.entrySet().stream().sorted((o1, o2) -> (int) (o2.getValue()-o1.getValue())).collect(toList());
+        List<Map.Entry<Cliente,Double>> mapaClienteOrdenado = clienteTotalMap.entrySet().stream()
+                .sorted((o1, o2) -> (int) (o2.getValue()-o1.getValue()))
+                .collect(toList());
+
         return  mapaClienteOrdenado;
     }
 }
