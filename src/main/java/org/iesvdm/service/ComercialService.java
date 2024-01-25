@@ -144,7 +144,7 @@ public class ComercialService {
 
     public List<Map.Entry<Cliente,Double>> listaClientesOrdenados(int idComercial){
 
-        /* CON SQL
+        /* CON SQL // Necesitaria DTO
         SELECT
             c.id,
             c.nombre,
@@ -167,12 +167,12 @@ public class ComercialService {
         // Obtengo lista pedidos de un comercial por ID
         List<Pedido> pedidoList = pedidoDAO.pedidosByComercial(idComercial);
 
-        // Mapeo cliente-importe, pero no sale ordenado
+        // Mapeo cliente-importe // No sale ordenado al ser Map y no HashMap
         Map<Cliente, Double> clienteTotalMap = pedidoList.stream().
                 sorted(comparingDouble(Pedido::getTotal).reversed()).
                 collect(groupingBy(Pedido::getCliente, summingDouble(Pedido::getTotal)));
 
-        // Con ayuda de Matti
+        // Con ayuda de Matti // Falta redondear
         List<Map.Entry<Cliente,Double>> mapaClienteOrdenado = clienteTotalMap.entrySet().stream()
                 .sorted((o1, o2) -> (int) (o2.getValue()-o1.getValue()))
                 .collect(toList());

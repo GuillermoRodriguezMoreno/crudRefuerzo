@@ -67,17 +67,18 @@
         $(function (){
             let url = new URL(window.location.href);
             let valLang = url.searchParams.get('lang')
-            $('#locales option[value='+valLang+']').attr('selected', 'selected');
+            $('#locales option[value="'+valLang+'"]').attr('selected', 'selected');
 
             $("#locales").change(function () {
                 var selectedOption = $('#locales').val();
-                if (selectedOption != '') {
+                if (selectedOption != ''){
                     let url = new URL(window.location.href);
                     url.searchParams.set('lang', selectedOption);
-                    window.location.href = url.href;
+                    window.location.href= url.href;
                 }
             });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

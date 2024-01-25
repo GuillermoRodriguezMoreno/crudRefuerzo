@@ -139,7 +139,7 @@
                 </div>
                 <div class="col-md-4 align-self-center" th:text="${cliente.getKey().getNombre()}+' '+${cliente.getKey().getApellido1()}+' '+${cliente.getKey().getApellido2()}">Cliente
                 </div>
-                <div class="col-md-3 align-self-center" th:text="${cliente.getValue()}">Total
+                <div class="col-md-3 align-self-center" th:text="${#numbers.formatDecimal(cliente.getValue(), 1, 'DEFAULT', 2, 'DEFAULT')}">Total
                 </div>
                 <div class="col-md-4 align-self-center d-flex justify-content-end">
                     <form th:action="@{/clientes/__${cliente.getKey().getId()}__}" style="display: inline;">
