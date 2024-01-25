@@ -134,15 +134,15 @@
             </div>
         </div>
         <div class="container bg-light" style="margin-bottom: 100px;">
-            <div class="row mt-2 body" th:each="cliente : ${lista_clientes.keySet()}">
-                <div class="col-md-1 align-self-center" th:text="${cliente.getId()}">id
+            <div class="row mt-2 body" th:each="cliente : ${lista_clientes}">
+                <div class="col-md-1 align-self-center" th:text="${cliente.getKey().getId()}">id
                 </div>
-                <div class="col-md-4 align-self-center" th:text="${cliente.getNombre()}+' '+${cliente.getApellido1()}+' '+${cliente.getApellido2()}">Cliente
+                <div class="col-md-4 align-self-center" th:text="${cliente.getKey().getNombre()}+' '+${cliente.getKey().getApellido1()}+' '+${cliente.getKey().getApellido2()}">Cliente
                 </div>
-                <div class="col-md-3 align-self-center" th:text="${lista_clientes.get(cliente)}">Total
+                <div class="col-md-3 align-self-center" th:text="${cliente.getValue()}">Total
                 </div>
                 <div class="col-md-4 align-self-center d-flex justify-content-end">
-                    <form th:action="@{/clientes/__${cliente.getId()}__}" style="display: inline;">
+                    <form th:action="@{/clientes/__${cliente.getKey().getId()}__}" style="display: inline;">
                         <input th:value="#{btn.ver.cliente}" type="submit" value="Ver Cliente" class="btn btn-info" />
                     </form>
                 </div>

@@ -142,7 +142,7 @@ public class ComercialService {
         return max;
     }
 
-    public Map<Cliente, Double> listaClientesOrdenados(int idComercial){
+    public List<Map.Entry<Cliente,Double>> listaClientesOrdenados(int idComercial){
 
         /* CON SQL
         SELECT
@@ -167,11 +167,13 @@ public class ComercialService {
         // Obtengo lista pedidos de un comercial por ID
         List<Pedido> pedidoList = pedidoDAO.pedidosByComercial(idComercial);
 
-        // Mapeo cliente-importe
+        // Mapeo cliente-importe, pero no sale ordenado
         Map<Cliente, Double> clienteTotalMap = pedidoList.stream().
                 sorted(comparingDouble(Pedido::getTotal).reversed()).
                 collect(groupingBy(Pedido::getCliente, summingDouble(Pedido::getTotal)));
 
-        return  clienteTotalMap;
+        // Con ayuda de Matti
+        List<Map.Entry<Cliente,Double>> mapaClienteOrdenado = clienteTotalMap.entrySet().stream().sorted((o1, o2) -> (int) (o2.getValue()-o1.getValue())).collect(toList());
+        return  mapaClienteOrdenado;
     }
 }

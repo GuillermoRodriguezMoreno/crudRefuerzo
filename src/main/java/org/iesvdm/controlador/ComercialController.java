@@ -56,7 +56,7 @@ public class ComercialController {
         model.addAttribute("pedido_max", comercialService.pedidoMax(id));
 
         // Clientes comercial
-        Map<Cliente, Double> listaClientes = comercialService.listaClientesOrdenados(id);
+        List<Map.Entry<Cliente,Double>> listaClientes = comercialService.listaClientesOrdenados(id);
         model.addAttribute("lista_clientes", listaClientes);
 
         return "detalle-comercial";
