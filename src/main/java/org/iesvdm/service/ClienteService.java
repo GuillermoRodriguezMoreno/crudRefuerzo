@@ -1,5 +1,7 @@
 package org.iesvdm.service;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,15 +75,78 @@ public class ClienteService {
 
 		// Settear a DTO
 		List<Comercial> comercialList;
-		int conteoPedidos, pedidos_trimestre, pedidos_semestre, pedidos_año, pedidos_lustro;
+		long conteoPedidos, pedidos_trimestre, pedidos_semestre, pedidos_año, pedidos_lustro;
 
 		// Obtengo lista de pedidos de un cliente
 		List<Pedido> pedidoList = this.pedidosByCliente(idCliente);
 
-		// Obtener datos
+		// Obtener datos // TODOS LOS STREAMS TESTEADOS EN CARPETA TEST
+		// Lista comerciales de un cliente
 		comercialList = pedidoList.stream()
-				.
+				.map(Pedido::getComercial)
+				.distinct()
+				.collect(toList());
 
-		return pedidoList;
+		// Conteo pedidos por comercial
+		conteoPedidos = pedidoList.stream()
+				.map(Pedido::getComercial)
+				.count();
+
+		// Conteo trimestre
+		pedidos_trimestre = pedidoList.stream()
+				.filter(pedido ->{
+					// Cast de fecha a Calendar para operar
+					Calendar f_pedido = Calendar.getInstance();
+					f_pedido.setTime(pedido.getFecha());
+
+					// Calendar fecha actual - 3 meses
+					Calendar f_actual = Calendar.getInstance();
+					f_actual.add(Calendar.MONTH, -3);
+
+					// Devuelvo boolean segun este dentro del trimestre
+                    return f_pedido.after(f_actual);
+				})
+				.count();
+
+		// Conteo pedidos en semestre
+		pedidos_semestre = pedidoList.stream()
+				.filter(pedido ->{
+					Calendar f_pedido = Calendar.getInstance();
+					f_pedido.setTime(pedido.getFecha());
+
+					Calendar f_actual = Calendar.getInstance();
+					f_actual.add(Calendar.MONTH, -6);
+
+					return f_pedido.after(f_actual);
+				})
+				.count();
+
+		// Conteo pedidos en año
+		pedidos_año = pedidoList.stream()
+				.filter(pedido ->{
+					Calendar f_pedido = Calendar.getInstance();
+					f_pedido.setTime(pedido.getFecha());
+
+					Calendar f_actual = Calendar.getInstance();
+					f_actual.add(Calendar.YEAR, -1);
+
+					return f_pedido.after(f_actual);
+				})
+				.count();
+
+		// Conteo pedidos en lustro
+		pedidos_lustro = pedidoList.stream()
+				.filter(pedido ->{
+					Calendar f_pedido = Calendar.getInstance();
+					f_pedido.setTime(pedido.getFecha());
+
+					Calendar f_actual = Calendar.getInstance();
+					f_actual.add(Calendar.YEAR, -5);
+
+					return f_pedido.after(f_actual);
+				})
+				.count();
+
+		return null;
 	}
 }
