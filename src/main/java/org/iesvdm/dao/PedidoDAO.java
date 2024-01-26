@@ -20,6 +20,8 @@ public interface PedidoDAO {
 
     public List<Pedido> pedidosByComercial(int comercialID);
 
+    public List<Pedido> pedidosByCliente(int clienteID);
+
     public void update(Pedido pedido);
 
     public void delete(int id);

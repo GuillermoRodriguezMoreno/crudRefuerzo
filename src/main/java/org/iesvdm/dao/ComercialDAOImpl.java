@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
+import org.iesvdm.modelo.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -121,5 +122,4 @@ public class ComercialDAOImpl implements ComercialDAO {
 		log.info("Delete de comercial con {} registros eliminados.", rows);
 
 	}
-
 }

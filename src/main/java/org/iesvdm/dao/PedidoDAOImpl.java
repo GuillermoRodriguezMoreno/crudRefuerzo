@@ -61,6 +61,23 @@ public class PedidoDAOImpl implements PedidoDAO{
     }
 
     @Override
+    public List<Pedido> pedidosByCliente(int clienteID) {
+
+        List<Pedido> listPedido = this.jdbcTemplate.query("""
+                SELECT * FROM pedido WHERE id_cliente = ?;
+                """, (rs, rowNum) -> new Pedido(
+                        rs.getInt("id"),
+                        rs.getDouble("total"),
+                        rs.getDate("fecha"),
+                        clienteDAO.find(rs.getInt("id_cliente")).get(),
+                        comercialDAO.find(rs.getInt("id_comercial")).get()
+                ), clienteID
+        );
+
+        return listPedido;
+    }
+
+    @Override
     public void create(Pedido pedido) {
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
