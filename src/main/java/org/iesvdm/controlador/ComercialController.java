@@ -7,7 +7,6 @@ import org.iesvdm.modelo.Comercial;
 import org.iesvdm.modelo.Pedido;
 import org.iesvdm.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -75,7 +75,7 @@ public class ComercialController {
     }
 
     @PostMapping("/comerciales/crear")
-    public String submitCrear(@Valid @ModelAttribute("comercial") Comercial comercial, Model model, BindingResult bindingResult) {
+    public String submitCrear(@Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
 
         if(bindingResult.hasErrors()){
 
@@ -84,6 +84,8 @@ public class ComercialController {
         }
 
         comercialService.newComercial(comercial);
+        List<Comercial> listaComerciales =  comercialService.listAll();
+        model.addAttribute("listaComerciales", listaComerciales);
 
         return "comerciales" ;
 
@@ -98,16 +100,19 @@ public class ComercialController {
     }
 
     @PostMapping("/comerciales/editar/{id}")
-    public RedirectView submitEditar(@Valid @ModelAttribute("comercial") Comercial comercial, Model model, BindingResult bindingResult){
+    public String submitEditar(@Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
 
             model.addAttribute("comercial", comercial);
-            return new RedirectView("/editar-comercial");
+            return "editar-comercial";
         }
-        comercialService.replaceComercial(comercial);
 
-        return new RedirectView("/comerciales");
+        comercialService.replaceComercial(comercial);
+        List<Comercial> listaComerciales =  comercialService.listAll();
+        model.addAttribute("listaComerciales", listaComerciales);
+
+        return "comerciales";
     }
 
     @PostMapping("comerciales/borrar/{id}")

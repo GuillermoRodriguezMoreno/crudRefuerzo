@@ -153,8 +153,9 @@ public class ClienteDAOImpl implements ClienteDAO {
 										, cliente.getApellido2()
 										, cliente.getCiudad()
 										, cliente.getCategoria()
+										, cliente.getEmail()
 										, cliente.getId()
-										, cliente.getEmail());
+										);
 		
 		log.info("Update de Cliente con {} registros actualizados.", rows);
     

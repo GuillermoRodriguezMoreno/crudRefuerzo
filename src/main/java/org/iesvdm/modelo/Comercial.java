@@ -23,6 +23,7 @@ public class Comercial {
 	@Size(max = 30, message = "{msg.valid.size30}")
 	private String apellido1;
 	private String apellido2;
+	@NotNull(message = "{msg.valid.notNull}")
 	@DecimalMin(value = "0.276", message = "{msg.valid.minValue}")
 	@DecimalMax(value="0.946", message = "{msg.valid.maxValue}")
 	private BigDecimal comision;

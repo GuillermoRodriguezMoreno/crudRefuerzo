@@ -64,17 +64,19 @@ public class ClienteController {
 	}
 
 	@PostMapping("/clientes/crear")
-	public RedirectView submitCrear(@Valid @ModelAttribute("cliente") Cliente cliente,Model model, BindingResult bindingResult) {
+	public String submitCrear(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
 
 		if(bindingResult.hasErrors()){
 
 			model.addAttribute("cliente", cliente);
-			return new RedirectView("/crear-cliente");
+			return "crear-cliente";
 		}
 
 		clienteService.newCliente(cliente);
+		List<Cliente> listaClientes =  clienteService.listAll();
+		model.addAttribute("listaClientes", listaClientes);
 
-		return new RedirectView("/clientes") ;
+		return "clientes" ;
 
 	}
 	@GetMapping("/clientes/editar/{id}")
@@ -87,17 +89,19 @@ public class ClienteController {
 	}
 
 	@PostMapping("/clientes/editar/{id}")
-	public RedirectView submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, Model model, BindingResult bindingResult){
+	public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model){
 
 		if(bindingResult.hasErrors()){
 
 			model.addAttribute("cliente", cliente);
-			return new RedirectView("/editar-cliente");
+			return "editar-cliente";
 		}
 
 		clienteService.replaceCliente(cliente);
+		List<Cliente> listaClientes =  clienteService.listAll();
+		model.addAttribute("listaClientes", listaClientes);
 
-		return new RedirectView("/clientes");
+		return "clientes";
 	}
 
 	@PostMapping("clientes/borrar/{id}")

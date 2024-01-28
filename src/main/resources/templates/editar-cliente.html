@@ -80,7 +80,7 @@
                     <label th:text="#{msg.cliente.categoria}">Categoria</label>
                 </div>
                 <div style="float: none;width: auto;overflow: hidden;">
-                    <input id="inputcategoria" type="text" class="form-control" th:classappend="${#fields.hasErrors('categoria')?'is-invalid':''}" th:field="*{categoria}"  />
+                    <input id="inputcategoria" type="number" class="form-control" th:classappend="${#fields.hasErrors('categoria')?'is-invalid':''}" th:field="*{categoria}"  />
                     <ul class="text-danger " th:if="${#fields.hasErrors('categoria')}">
                         <li th:each="err : ${#fields.errors('categoria')}" th:text="${err}" />
                     </ul>
