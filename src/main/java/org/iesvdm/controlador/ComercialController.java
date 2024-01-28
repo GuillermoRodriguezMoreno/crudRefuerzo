@@ -75,17 +75,17 @@ public class ComercialController {
     }
 
     @PostMapping("/comerciales/crear")
-    public RedirectView submitCrear(@Valid @ModelAttribute("comercial") Comercial comercial, Model model, BindingResult bindingResult) {
+    public String submitCrear(@Valid @ModelAttribute("comercial") Comercial comercial, Model model, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()){
 
             model.addAttribute("comercial", comercial);
-            return new RedirectView("/crear-comercial");
+            return "crear-comercial";
         }
 
         comercialService.newComercial(comercial);
 
-        return new RedirectView("/comerciales") ;
+        return "comerciales" ;
 
     }
     @GetMapping("comerciales/editar/{id}")
