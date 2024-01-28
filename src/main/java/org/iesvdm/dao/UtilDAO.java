@@ -4,6 +4,7 @@ import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.modelo.Pedido;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -19,13 +20,14 @@ public class UtilDAO {
                         rs.getString("C.apellido1"),
                         rs.getString("C.apellido2"),
                         rs.getString("C.ciudad"),
-                        rs.getInt("C.categoría")
+                        rs.getInt("C.categoría"),
+                        rs.getString("C.email")
                 ),
                 new Comercial(rs.getInt("CO.id"),
                         rs.getString("CO.nombre"),
                         rs.getString("CO.apellido1"),
                         rs.getString("CO.apellido2"),
-                        (float) rs.getDouble("CO.comisión")
+                        rs.getBigDecimal("CO.comisión")
                 )
         );
     }
@@ -35,6 +37,6 @@ public class UtilDAO {
                 , rs.getString("nombre")
                 , rs.getString("apellido1")
                 , rs.getString("apellido2")
-                , rs.getFloat("comisión"));
+                , new BigDecimal(String.valueOf(rs.getDouble("comisión"))));
     }
 }

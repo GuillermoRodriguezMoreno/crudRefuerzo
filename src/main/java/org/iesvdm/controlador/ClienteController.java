@@ -2,6 +2,7 @@ package org.iesvdm.controlador;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.iesvdm.dto.DetalleClienteDTO;
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
@@ -10,6 +11,7 @@ import org.iesvdm.service.ComercialService;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -62,7 +64,13 @@ public class ClienteController {
 	}
 
 	@PostMapping("/clientes/crear")
-	public RedirectView submitCrear(@ModelAttribute("cliente") Cliente cliente) {
+	public RedirectView submitCrear(@Valid @ModelAttribute("cliente") Cliente cliente,Model model, BindingResult bindingResult) {
+
+		if(bindingResult.hasErrors()){
+
+			model.addAttribute("cliente", cliente);
+			return new RedirectView("/crear-cliente");
+		}
 
 		clienteService.newCliente(cliente);
 
@@ -79,7 +87,13 @@ public class ClienteController {
 	}
 
 	@PostMapping("/clientes/editar/{id}")
-	public RedirectView submitEditar(@ModelAttribute("cliente") Cliente cliente){
+	public RedirectView submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, Model model, BindingResult bindingResult){
+
+		if(bindingResult.hasErrors()){
+
+			model.addAttribute("cliente", cliente);
+			return new RedirectView("/editar-cliente");
+		}
 
 		clienteService.replaceCliente(cliente);
 

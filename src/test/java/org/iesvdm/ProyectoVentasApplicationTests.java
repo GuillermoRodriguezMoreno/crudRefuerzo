@@ -29,7 +29,8 @@ public class ProyectoVentasApplicationTests {
                 , "Martín"
                 , "Tejero"
                 , "Málaga"
-                , 1);
+                , 1
+                , "ejemplo@ejemplo.es");
 
 
         this.clienteDAOImpl.create(cliente);
