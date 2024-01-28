@@ -3,11 +3,14 @@ package org.iesvdm.service;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.iesvdm.dao.ClienteDAO;
 import org.iesvdm.dao.PedidoDAO;
 import org.iesvdm.dao.PedidoDAOImpl;
+import org.iesvdm.dto.DetalleClienteDTO;
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.modelo.Pedido;
@@ -16,7 +19,7 @@ import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
 import static java.util.Comparator.comparingDouble;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 @Service
 public class ClienteService {
@@ -71,7 +74,7 @@ public class ClienteService {
 		return pedidoDAO.pedidosByCliente(idCliente);
 	}
 
-	public List<Comercial> comercialesByCliente(int idCliente){
+	public DetalleClienteDTO comercialesByCliente(int idCliente){
 
 		// Settear a DTO
 		List<Comercial> comercialList;
@@ -88,9 +91,8 @@ public class ClienteService {
 				.collect(toList());
 
 		// Conteo pedidos por comercial
-		conteoPedidos = pedidoList.stream()
-				.map(Pedido::getComercial)
-				.count();
+		Map<Comercial, Long> conteoPedidosPorComercial = pedidoList.stream()
+				.collect(groupingBy(Pedido::getComercial, counting()));
 
 		// Conteo trimestre
 		pedidos_trimestre = pedidoList.stream()
@@ -147,6 +149,16 @@ public class ClienteService {
 				})
 				.count();
 
-		return null;
+		// Setteo a DTO
+		DetalleClienteDTO detalleClienteDTO = new DetalleClienteDTO();
+		detalleClienteDTO.setIdCliente(idCliente);
+		detalleClienteDTO.setListaComerciales(comercialList);
+		detalleClienteDTO.setConteoPedidosPorComercial(conteoPedidosPorComercial);
+		detalleClienteDTO.setConteoPedidosTrimestre(pedidos_trimestre);
+		detalleClienteDTO.setConteoPedidosSemestre(pedidos_semestre);
+		detalleClienteDTO.setConteoPedidosAño(pedidos_año);
+		detalleClienteDTO.setConteoPedidosLustro(pedidos_lustro);
+
+		return detalleClienteDTO;
 	}
 }

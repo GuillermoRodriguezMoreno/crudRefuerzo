@@ -25,6 +25,18 @@ public class ventasStreamTest {
     @Test
     void streamTest(){
 
+        // Insertar en BBDD
+        /*
+        insert into pedido (total, fecha, id_cliente, id_comercial)
+        values (100, '2024-01-2', 1, 1);
+        insert into pedido (total, fecha, id_cliente, id_comercial)
+        values (200, '2023-08-2', 1, 1);
+        insert into pedido (total, fecha, id_cliente, id_comercial)
+        values (300, '2023-03-2', 1, 2);
+        insert into pedido (total, fecha, id_cliente, id_comercial)
+        values (400, '2021-01-2', 1, 3);
+         */
+
         List<Pedido> pedidoList = pedidoDAO.pedidosByCliente(1);
 
         // Lista comerciales de un cliente
@@ -33,7 +45,7 @@ public class ventasStreamTest {
                 .distinct()
                 .collect(toList());
 
-        Assertions.assertEquals(2, comercialList.size());
+        Assertions.assertEquals(4, comercialList.size());
 
         // Conteo pedidos por comercial
         //long conteoPedidos = pedidoList.stream()

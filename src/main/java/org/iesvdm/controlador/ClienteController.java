@@ -2,6 +2,7 @@ package org.iesvdm.controlador;
 
 import java.util.List;
 
+import org.iesvdm.dto.DetalleClienteDTO;
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.service.ClienteService;
@@ -44,6 +45,9 @@ public class ClienteController {
 
 		Cliente cliente = clienteService.one(id);
 		model.addAttribute("cliente", cliente);
+
+		DetalleClienteDTO detalleClienteDTO = clienteService.comercialesByCliente(id);
+		model.addAttribute("detalle_clienteDTO", detalleClienteDTO);
 
 		return "detalle-cliente";
 	}
