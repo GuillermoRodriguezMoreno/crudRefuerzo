@@ -73,11 +73,8 @@ public class ClienteController {
 		}
 
 		clienteService.newCliente(cliente);
-		List<Cliente> listaClientes =  clienteService.listAll();
-		model.addAttribute("listaClientes", listaClientes);
 
-		return "clientes" ;
-
+		return "redirect:/clientes" ;
 	}
 	@GetMapping("/clientes/editar/{id}")
 	public String editar(Model model, @PathVariable Integer id){
@@ -98,10 +95,8 @@ public class ClienteController {
 		}
 
 		clienteService.replaceCliente(cliente);
-		List<Cliente> listaClientes =  clienteService.listAll();
-		model.addAttribute("listaClientes", listaClientes);
 
-		return "clientes";
+		return "redirect:/clientes";
 	}
 
 	@PostMapping("clientes/borrar/{id}")
